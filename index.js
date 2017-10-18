@@ -1,4 +1,4 @@
-const dotenv = require('dotenv-safe');
+const dotenv = require('dotenv-extended');
 const fs = require('fs');
 const DefinePlugin = require('webpack').DefinePlugin;
 
@@ -6,12 +6,14 @@ module.exports = DotenvPlugin;
 
 function DotenvPlugin(options) {
   options = options || {};
-  if (!options.sample) options.sample = './.env.sample';
+  if (!options.defaults) options.defaults = './.env.defaults';
+  if (!options.schema) options.schema = './.env.schema';
   if (!options.path) options.path = './.env';
 
-  dotenv.config(options);
+  dotenv.load(options);
 
-  this.example = dotenv.parse(fs.readFileSync(options.sample));
+  this.defaults = dotenv.parse(fs.readFileSync(options.defaults));
+  this.schema = dotenv.parse(fs.readFileSync(options.schema));
   this.env = {};
   if (fs.existsSync(options.path)) {
     this.env = dotenv.parse(fs.readFileSync(options.path));
@@ -19,7 +21,7 @@ function DotenvPlugin(options) {
 }
 
 DotenvPlugin.prototype.apply = function(compiler) {
-  const definitions = Object.keys(this.example).reduce((definitions, key) => {
+  const definitions = Object.keys(this.schema).reduce((definitions, key) => {
     const existing = process.env[key];
 
     if (existing) {
@@ -33,9 +35,17 @@ DotenvPlugin.prototype.apply = function(compiler) {
     return definitions;
   }, {});
 
-  const plugin = {
-    'process.env': definitions,
-  };
+  const definitionsWithDefaults = Object.keys(this.defaults).reduce((definitions, key) => {
+    const definedValue = definitions[key];
 
-  compiler.apply(new DefinePlugin(plugin));
+    if (!definedValue) {
+      definitions[key] = JSON.stringify(this.defaults[key]);
+    }
+
+    return definitions;
+  }, definitions);
+
+  compiler.apply(new DefinePlugin({
+      'process.env': definitionsWithDefaults,
+  }));
 };

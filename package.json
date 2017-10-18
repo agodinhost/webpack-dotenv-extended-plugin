@@ -1,14 +1,14 @@
 {
-  "name": "webpack-dotenv-plugin",
-  "version": "2.0.2",
-  "description": "Use dotenv with webpack.",
+  "name": "webpack-dotenv-extended-plugin",
+  "version": "0.0.1",
+  "description": "Use dotenv-extended with webpack.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nwinch/webpack-dotenv-plugin.git"
+    "url": "https://github.com/Alex-Krautmann/webpack-dotenv-extended-plugin.git"
   },
   "keywords": [
     "webpack",
@@ -19,14 +19,11 @@
     "variables",
     "plugin"
   ],
-  "author": "Nathan Winch <nwinch@gmail.com>",
+  "author": "Alex Krautmann <alex.krautmann@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nwinch/webpack-dotenv-plugin/issues"
-  },
-  "homepage": "https://github.com/nwinch/webpack-dotenv-plugin#readme",
+  "homepage": "https://github.com/Alex-Krautmann/webpack-dotenv-extended-plugin#readme",
   "dependencies": {
-    "dotenv-safe": "^4.0.4"
+    "dotenv-extended": "^2.0.1"
   },
   "peerDependencies": {
     "webpack": ">=1.13.0"
