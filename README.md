@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     new DotenvPlugin({
       schema: './.env.schema',
-      defaults: './.env.default',
+      defaults: './.env.defaults',
       path: './.env'
     })
   ]
