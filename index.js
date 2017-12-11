@@ -5,7 +5,7 @@ const DefinePlugin = require('webpack').DefinePlugin;
 module.exports = DotenvPlugin;
 
 function DotenvPlugin(options) {
-  dotenv.load(options);
+  this.definitions = dotenv.load(options);
 }
 
 DotenvPlugin.prototype.apply = function(compiler) {
