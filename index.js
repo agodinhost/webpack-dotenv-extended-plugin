@@ -1,6 +1,6 @@
 const dotenv = require('dotenv-extended');
 const fs = require('fs');
-const DefinePlugin = require('webpack').DefinePlugin;
+const EnvironmentPlugin = require('webpack').EnvironmentPlugin;
 
 module.exports = DotenvPlugin;
 
@@ -13,19 +13,17 @@ function DotenvPlugin(options) {
 }
 
 DotenvPlugin.prototype.apply = function(compiler) {
-  const definitions = {};
-
-  Object.keys(process.env).forEach((key) => {
-    if (this.config.hasOwnProperty(key)) {
-      definitions[key] = JSON.stringify(process.env[key]);
-    }
-  });
-
   if (this.options.verbose) {
+    const definitions = {};
+
+    Object.keys(this.config).forEach((key) => {
+      if (this.config.hasOwnProperty(key)) {
+        definitions[key] = process.env[key];
+      }
+    });
+
     console.log('Applying dotenv configuration', JSON.stringify(definitions, null, 2));
   }
 
-  compiler.apply(new DefinePlugin({
-    'process.env': definitions
-  }));
+  compiler.apply(new EnvironmentPlugin(Object.keys(this.config)));
 };
