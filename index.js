@@ -1,51 +1,29 @@
 const dotenv = require('dotenv-extended');
 const fs = require('fs');
-const DefinePlugin = require('webpack').DefinePlugin;
+const EnvironmentPlugin = require('webpack').EnvironmentPlugin;
 
 module.exports = DotenvPlugin;
 
 function DotenvPlugin(options) {
-  options = options || {};
-  if (!options.defaults) options.defaults = './.env.defaults';
-  if (!options.schema) options.schema = './.env.schema';
-  if (!options.path) options.path = './.env';
+  this.options = options || {};
 
-  dotenv.load(options);
-
-  this.defaults = dotenv.parse(fs.readFileSync(options.defaults));
-  this.schema = dotenv.parse(fs.readFileSync(options.schema));
-  this.env = {};
-  if (fs.existsSync(options.path)) {
-    this.env = dotenv.parse(fs.readFileSync(options.path));
-  }
+  // Load into process.env, and keep track of all the
+  // keys we care about for webpack serialization. 
+  this.config = dotenv.load(options) || {};
 }
 
 DotenvPlugin.prototype.apply = function(compiler) {
-  const definitions = Object.keys(this.schema).reduce((definitions, key) => {
-    const existing = process.env[key];
+  if (this.options.verbose) {
+    const definitions = {};
 
-    if (existing) {
-      definitions[key] = JSON.stringify(existing);
-      return definitions;
-    }
+    Object.keys(this.config).forEach((key) => {
+      if (this.config.hasOwnProperty(key)) {
+        definitions[key] = process.env[key];
+      }
+    });
 
-    const value = this.env[key];
-    if (value) definitions[key] = JSON.stringify(value);
+    console.log('Applying dotenv configuration', JSON.stringify(definitions, null, 2));
+  }
 
-    return definitions;
-  }, {});
-
-  const definitionsWithDefaults = Object.keys(this.defaults).reduce((definitions, key) => {
-    const definedValue = definitions[key];
-
-    if (!definedValue) {
-      definitions[key] = JSON.stringify(this.defaults[key]);
-    }
-
-    return definitions;
-  }, definitions);
-
-  compiler.apply(new DefinePlugin({
-      'process.env': definitionsWithDefaults,
-  }));
+  compiler.apply(new EnvironmentPlugin(Object.keys(this.config)));
 };
