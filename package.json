@@ -1,6 +1,6 @@
 {
   "name": "webpack-dotenv-extended-plugin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Use dotenv-extended with webpack.",
   "main": "index.js",
   "scripts": {
