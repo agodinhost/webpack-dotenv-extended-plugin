@@ -23,7 +23,8 @@
   "license": "MIT",
   "homepage": "https://github.com/Alex-Krautmann/webpack-dotenv-extended-plugin#readme",
   "dependencies": {
-    "dotenv-extended": "^2.0.1"
+    "dotenv-extended": "^2.9.0",    
+    "dotenv-expand": "^9.0.0"
   },
   "peerDependencies": {
     "webpack": ">=1.13.0"
