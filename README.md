@@ -1,6 +1,6 @@
 # Webpack dotenv-extended plugin
 
-Use dotenv-extended with webpack.
+Use dotenv-extended AND expanded with webpack 5.
 
 ## Motivation
 
