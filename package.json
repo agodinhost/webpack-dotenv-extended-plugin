@@ -1,5 +1,5 @@
 {
-  "name": "webpack-dotenv-extended-plugin",
+  "name": "@gec.js/webpack-dotenvx-plugin",
   "version": "1.0.0",
   "description": "Use dotenv-extended with webpack.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alex-Krautmann/webpack-dotenv-extended-plugin.git"
+    "url": "https://github.com/agodinhost/webpack-dotenvx-plugin.git"
   },
   "keywords": [
     "webpack",
@@ -19,14 +19,14 @@
     "variables",
     "plugin"
   ],
-  "author": "Alex Krautmann <alex.krautmann@gmail.com>",
+  "author": "Woody Godinho <agodinhost@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/Alex-Krautmann/webpack-dotenv-extended-plugin#readme",
+  "homepage": "https://github.com/agodinhost/webpack-dotenvx-plugin#readme",
   "dependencies": {
-    "dotenv-extended": "^2.9.0",    
-    "dotenv-expand": "^9.0.0"
+    "dotenv-expand": "^9.0.0",
+    "@gec.js/dotenv-extended": "2.9.1"
   },
   "peerDependencies": {
-    "webpack": ">=1.13.0"
+    "webpack": ">=5.75.0"
   }
 }
