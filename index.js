@@ -75,6 +75,9 @@ xDotEnv.prototype.load = function (...options) {
   }
 }
 
+//TODO: return this to cascade calls
+//TODO: expand method
+
 xDotEnv.prototype.apply = function (compiler) {
   debug('# xDotEnv.apply(compiler)');
 

@@ -2,29 +2,44 @@
   "name": "@gec.js/webpack-dotenvx-plugin",
   "version": "1.0.0",
   "description": "Use dotenv-extended with webpack.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/agodinhost/webpack-dotenvx-plugin.git"
   },
   "keywords": [
     "webpack",
     "dotenv",
-    "dot",
-    "env",
     "environment",
     "variables",
     "plugin"
   ],
   "author": "Woody Godinho <agodinhost@gmail.com>",
+  "private": false,
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+
   "homepage": "https://github.com/agodinhost/webpack-dotenvx-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agodinhost/webpack-dotenvx-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agodinhost/webpack-dotenvx-plugin/issues"
+  },
+
   "dependencies": {
     "dotenv-expand": "^9.0.0",
-    "@gec.js/dotenv-extended": "2.9.1"
+    "@gec.js/dotenv-extended": "^2.9.1"
   },
   "peerDependencies": {
     "webpack": ">=5.75.0"
